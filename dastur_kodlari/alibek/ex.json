@@ -1,0 +1,23 @@
+{
+    "agents": [
+     
+      {
+        "To‘liq ism-sharif": "Karimova Dilnoza Rustam qizi",
+        "Tug‘ilgan sana": "22-03-2001",
+        "Jinsi": "ayol",
+        "Pasport seriyasi va raqami": "AB1234567",
+        "Telefon raqami": "+998901234567",
+        "E-pochta": "dilnoza@example.com",
+        "Manzil": "Toshkent shahri, Chilonzor tumani"
+      },
+      {
+        "To‘liq ism-sharif": "Rasulov Bekzod Jamshid o‘g‘li",
+        "Tug‘ilgan sana": "05-09-1999",
+        "Jinsi": "erkak",
+        "Pasport seriyasi va raqami": "AC9876543",
+        "Telefon raqami": "+998933334455",
+        "E-pochta": "bekzod@example.com",
+        "Manzil": "Samarqand viloyati, Kattaqo‘rg‘on tumani"
+      }
+  }
+  
