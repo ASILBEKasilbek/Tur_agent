@@ -26,8 +26,28 @@ tour_packages = [
     {"country": "Australia", "city": "Sydney", "days": 9, "price_usd": 1900, "hotel": "5-star", "transport": "Flight", "season": "Winter"}
 ]
 
+YASHIL="\033[32m"
+
+RANG="\033[0m"  
 def view_all_tours():
     # Ichidagi 'tours' bo‘limini olamiz
- for key,value in tour_packages.items():
-        print(f"{key}:{value}")
-        return "Hamma tourlar kursatildi"
+    # for key,value in tour_packages.items():
+    #     print(f"{key}:{value}")
+    #     return "Hamma tourlar kursatildi"
+    for i in tour_packages:
+        print(f"""{YASHIL}
+Davlat:{i["country"]},
+Shahar:{i["city"]},
+
+{RANG}""")
+        
+
+def tour_search_davlat(davlat_nomi):
+    t=[]
+    for i in tour_packages:
+        if davlat_nomi==i["country"]:
+            t.append(i)
+    return t
+
+nomi=input("davlat noini kiriting?:")
+print(tour_search_davlat(nomi))

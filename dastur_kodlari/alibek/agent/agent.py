@@ -1,11 +1,12 @@
 import json
-from view_all_tours.view_tour import view_all_tours
-from search_tour.search import search_tours
-from  bron.book_tour import book_tour
-from mijozlarni_boshqarish.manage_customers import manage_customers
-from manage_payments.manage_payments import manage_payments
-from view_my_customers_bookings.my_customers_bookings import my_bookings
-from log_out.logout import logout
+
+from dastur_kodlari.alibek.agent.view_all_tours.view_tour import view_all_tours
+from dastur_kodlari.alibek.agent.search_tour.search import search_tours
+from dastur_kodlari.alibek.agent.bron.book_tour import book_tour
+from dastur_kodlari.alibek.agent.view_my_customers_bookings.manage_customers import manage_customers
+from dastur_kodlari.alibek.agent.manage_payments.manage_payments import manage_payments
+from dastur_kodlari.alibek.agent.mijozlarni_boshqarish.my_customers_bookings import my_bookings
+from dastur_kodlari.alibek.agent.log_out.logout import logout
 # JSON fayldan o‘qish funksiyasi
 # def load_data(filename):
 #     with open(filename, 'r', encoding='utf-8') as f:
@@ -49,9 +50,9 @@ def agent_menu():
             print("Noto‘g‘ri tanlov! Qaytadan urinib ko‘ring.")
 
 
-# # === Dastur ishga tushirish ===
-if __name__ == "__main__":
-    agent_menu()
+# # # # === Dastur ishga tushirish ===
+# if __name__ == "__main__":
+#     agent_menu()
 
 
 

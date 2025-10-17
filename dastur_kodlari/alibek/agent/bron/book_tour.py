@@ -6,7 +6,7 @@ def book_tour():
     print("4. Bronni tasdiqlash")
    
 
-choice = input("Tanlovni kiriting: ")
+# choice = input("Tanlovni kiriting: ")
  
 
 
