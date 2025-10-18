@@ -1,7 +1,7 @@
 import json
 
 from dastur_kodlari.alibek.agent.view_all_tours.view_tour import view_all_tours
-from dastur_kodlari.alibek.agent.search_tour.search import search_tours
+# from dastur_kodlari.alibek.agent.search_tour.search import search_tours
 from dastur_kodlari.alibek.agent.bron.book_tour import book_tour
 from dastur_kodlari.alibek.agent.view_my_customers_bookings.manage_customers import manage_customers
 from dastur_kodlari.alibek.agent.manage_payments.manage_payments import manage_payments
@@ -34,8 +34,8 @@ def agent_menu():
 
         if tanlov == '1':
             view_all_tours()
-        elif tanlov == '2':
-            search_tours()
+        # elif tanlov == '2':
+            # search_tours()
         elif tanlov == '3':
             book_tour()
         elif tanlov == '4':
