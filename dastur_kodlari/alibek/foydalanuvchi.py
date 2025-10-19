@@ -2,6 +2,12 @@
 
 from dastur_kodlari.latofat.admin import barcha_tour,TOURLAR
 
+KOK="\033[34m"
+QIZIL="\033[31m"
+YASHIL="\033[32m"
+RANG="\033[0m" 
+
+
 users = []  # Barcha foydalanuvchilar saqlanadi
 current_user = None  # Hozir tizimga kirgan foydalanuvchi
 
@@ -31,14 +37,14 @@ def login_user():
             current_user = user
             print(f" Xush kelibsiz, {login}!")
             return
-    print(" Login yoki parol xato!")
+    print(f" {QIZIL} Login yoki parol xato! {RANG}")
 
 
 def show_balance():
     if current_user:
         print(f" Sizning balansingiz: {current_user['balance']} so‘m")
     else:
-        print(" Avval tizimga kiring!")
+        print(f" {QIZIL} Avval tizimga kiring! {RANG}")
 
 
 def add_balance():
@@ -47,7 +53,7 @@ def add_balance():
         current_user["balance"] += amount
         print(f" Hisobingiz to‘ldirildi! Yangi balans: {current_user['balance']} so‘m")
     else:
-        print(" Avval tizimga kiring!")
+        print(f" {QIZIL} Avval tizimga kiring! {RANG}")
 
 
 def buy_ticket():
@@ -57,20 +63,21 @@ def buy_ticket():
             current_user["balance"] -= price
             print(f" Chipta sotib olindi! Qolgan balans: {current_user['balance']} so‘m")
         else:
-            print(" Balans yetarli emas!")
+            print(f"{QIZIL} Balans yetarli emas!{RANG}")
     else:
-        print(" Avval tizimga kiring!")
+        print(f" {QIZIL} Avval tizimga kiring!{RANG}")
 
 def shaxsiy_kabinet():
     while True:
-        print("\n--- TUR AGENT TIZIMI ---")
-        print("1. Ro‘yxatdan o‘tish")
-        print("2. Tizimga kirish")
-        print("3. Balansni ko‘rish")
-        print("4. Balansga pul qo‘shish")
-        print("5. Chipta sotib olish")
-        print("6. Chiqish")
-        tanlov = input("Tanlovni kiriting: ")
+        print(f"""{YASHIL}
+            1. Ro‘yxatdan o‘tish
+            2. Tizimga kirish
+            3. Balansni ko‘rish
+            4. Balansga pul qo‘shish
+            5. Chipta sotib olish
+            6. Chiqish
+            {RANG}""")
+        tanlov = input(f"{KOK}Tanlovni kiriting: {RANG}")
 
         if tanlov == "1":
             register()
@@ -83,12 +90,10 @@ def shaxsiy_kabinet():
         elif tanlov == "5":
             buy_ticket()
         elif tanlov == "6":
-            print(" Dasturdan chiqildi.")
+            print(f"{YASHIL} Dasturdan chiqildi.{RANG}")
             break
         else:
-            print("Noto‘g‘ri tanlov!")
-
-
+            print(f"{QIZIL} Noto‘g‘ri tanlov! {RANG}")
 
 def uxshash(qayerdan1,qayerdan2):
     """Toshkent,Tashkent"""
@@ -104,9 +109,6 @@ def uxshash(qayerdan1,qayerdan2):
     else:
         return False
     
-    
-
-
 
 def tour_qidirish():
     print("""Qidirish""")
@@ -138,8 +140,7 @@ def foydalanuvchi_menu():
 5-chiqish
 
 """)
-    a=input("Tanlang:")
-
+    a=input(f" {YASHIL} Tanlang: {RANG}")
 
     if a=="1":
         barcha_tour()
