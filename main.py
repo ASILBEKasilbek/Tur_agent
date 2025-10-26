@@ -7,7 +7,6 @@ RANG="\033[0m"
 
 
 def tour_main():
-    print(90)
     while True:
         print(f"""
     {QIZIL}Shaxslar:{RANG}
