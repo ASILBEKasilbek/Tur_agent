@@ -1,6 +1,6 @@
 
 
-from dastur_kodlari.latofat.admin import barcha_tour,TOURLAR
+from dastur_kodlari.asilbek.admin import barcha_tour,TOURLAR
 
 KOK="\033[34m"
 QIZIL="\033[31m"
@@ -8,9 +8,8 @@ YASHIL="\033[32m"
 RANG="\033[0m" 
 
 
-users = []  # Barcha foydalanuvchilar saqlanadi
-current_user = None  # Hozir tizimga kirgan foydalanuvchi
-
+users = [] 
+current_user = None 
 
 def register():
     login = input("Yangi login kiriting: ")

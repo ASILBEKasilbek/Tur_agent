@@ -1,4 +1,4 @@
-from dastur_kodlari.latofat.admin import admin_menu
+from dastur_kodlari.asilbek.admin import admin_menu
 from dastur_kodlari.alibek.foydalanuvchi import foydalanuvchi_menu
 KOK="\033[34m"
 QIZIL="\033[31m"
@@ -7,6 +7,7 @@ RANG="\033[0m"
 
 
 def tour_main():
+    print(90)
     while True:
         print(f"""
     {QIZIL}Shaxslar:{RANG}

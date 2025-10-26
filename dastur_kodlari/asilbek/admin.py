@@ -22,7 +22,25 @@ TOURLAR=[
 ]
 
 
+import json
 
+JSON_FILE = "turlar.json"
+
+# TOURLAR ro'yxatini JSON faylga saqlash
+def saqlash_json():
+    with open(JSON_FILE, "w", encoding="utf-8") as f:
+        json.dump(TOURLAR, f, ensure_ascii=False, indent=4)
+    print("Ma'lumotlar JSON faylga saqlandi!")
+    
+def yuklash_json():
+    global TOURLAR
+    try:
+        with open(JSON_FILE, "r", encoding="utf-8") as f:
+            TOURLAR = json.load(f)
+        print("Ma'lumotlar JSON fayldan yuklandi!")
+    except FileNotFoundError:
+        print("JSON fayl topilmadi, yangi fayl yaratiladi.")
+        TOURLAR = []
 def tour_qoshish():
     print("Tour qushish uchun malumotlarni Kiriting!!")
     qayerdan=input("Qayerdan:")
