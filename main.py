@@ -17,7 +17,9 @@ def tour_main():
         a=input(f"{YASHIL}Tanlang:{RANG}")
 
         if a=="1":
+            
             foydalanuvchi_menu()
+
         elif a=="2":
             admin_menu()
         else:

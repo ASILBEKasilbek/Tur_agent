@@ -1,15 +1,4 @@
-"""  
-    "qayerdan": "Davlat,Shahar,Viloyat", 
-    "qayerga": "Davlatm,Shahar", 
-    "davomiylik": 5,
-    "vaqt" : "25.10.2025 22:25";
-    "narxi":"1$,5$,100$,500$";
-    "chipta_turi": "standart,business";
-    "joylar_soni": "3,40,50";
-    "transport_turi": "avtomobil,poyezd,samolyot:
 
-"""
-   
 KOK="\033[34m"
 QIZIL="\033[31m"
 YASHIL="\033[32m"
