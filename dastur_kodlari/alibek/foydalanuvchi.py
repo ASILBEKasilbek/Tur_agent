@@ -50,11 +50,6 @@ def pul_qushish(foydalanuvchi_balans):
                 i["balans"] = pul
             print(f"Sizning balansingiz: {i["balans"]}")
             
-        
-
-    
-    
-    
 
 
 def malumotlar(foydalanuvchi_id):
@@ -153,7 +148,6 @@ user=[
     }
 
 ]
-
 def ruyxatdan_utish():
     login=input("Login kiriting:")
     for i in user:
@@ -199,7 +193,35 @@ def kirish():
     print("Xato")
     print("Qaytadan kriting!!!")
     return False, 1
+
+
+SAVAT = []      
+def tour_tanlash():   
+    tanlov = input("Qaysi tur paketini xarid qilasiz? ID raqamini kiriting: ")
+    for i in TOURLAR:
+        if str(i["id"]) == tanlov:
+            SAVAT.append(i)
+            print(f"\nSiz {i['qayerga']} yo‘nalishidagi tur paketini tanladingiz!")
+
+            break
+    else:
+        print("Bunday ID mavjud emas.")
         
+def savat():
+    if not SAVAT:
+        print("Savat hozircha bo‘sh.")
+        return
+
+    print("Sizning savatingiz:")
+    for i in SAVAT:
+        print(f"{i['qayerga']} - narxi: {i['narxi']} - vaqt: {i['vaqt']}")
+
+    tasdiq = input("Savatdagi turlarni rasmiylashtirasizmi? (ha/yo‘q): ").lower()
+    if tasdiq == "ha":
+        print("Xarid rasmiylashtirildi! Rahmat!")
+        SAVAT.clear()
+    else:
+        print("Xarid bekor qilindi.")
 
 
 def foydalanuvchi_menu():
@@ -228,7 +250,7 @@ def foydalanuvchi_menu():
     elif a=="3":
         shaxsiy_kabinet(foydalanuvchi_id)
     elif a=="4":
-        pass
+        savat()
     elif a=="5":
         print("Foydalanuvchi paneldan chiqildi")
         return

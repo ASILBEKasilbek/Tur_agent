@@ -1,4 +1,4 @@
-
+from dastur_kodlari.alibek.foydalanuvchi import tour_tanlash
 KOK="\033[34m"
 QIZIL="\033[31m"
 YASHIL="\033[32m"
@@ -14,7 +14,7 @@ TOURLAR=[
 import json
 
 JSON_FILE = "turlar.json"
-
+   
 # TOURLAR ro'yxatini JSON faylga saqlash
 def saqlash_json():
     with open(JSON_FILE, "w", encoding="utf-8") as f:
@@ -59,68 +59,63 @@ def tour_qoshish():
 def tour_uchirish():
     barcha_tour()
     a=int(input("qaysi tourni uchirmoqchisiz(idsini kiriting):"))
-
     for i in TOURLAR:
         if i["id"]==a:
             TOURLAR.pop(a-1)
             print(f"{a} idli tour uchirildi")
     
-
 def barcha_tour():
+    tour_tanlash()
     for i in TOURLAR:
         print(f"""
-        "id":{i["id"]},
+        "id": {i["id"]},
         "qayerdan": {i["qayerdan"]}, 
         "qayerga": {i["qayerga"]}, 
         "davomiylik": {i["davomiylik"]},
-        "vaqt" : {i["vaqt"]},
+        "vaqt": {i["vaqt"]},
         "narxi": {i["narxi"]},
         "chipta_turi": {i["chipta_turi"]},
         "joylar_soni": {i["joylar_soni"]},
-        "transport_turi": {i["transport_turi"]},
-            """)
-    print("Barchasi chiqdi!!1")
-        
-# login_user=[{
-#     "login":"asilbek"
-#     "parol":"1234"
-#     },
-#     {
-#     "login":"asilbek"
-#     "parol":"1234"
-#     }
-# ]
+        "transport_turi": {i["transport_turi"]}
+        """)
+
+    print("Barchasi chiqdi!\n")
+
+
+
+
+
 def admin_menu():
-    login="asdfgh"
-    parol="1234"
-    l=input(f"{YASHIL}Login kiriting:{RANG}")
-    par=input(f"{YASHIL}parol kiriting:{RANG}")
+        login="asdfgh"
+        parol="1234"
+        l=input(f"{YASHIL}Login kiriting:{RANG}")
+        par=input(f"{YASHIL}parol kiriting:{RANG}")
 
-    if l!=login or par!=parol:
-        print(f"{QIZIL}Notogri kiritdingiz!!!{RANG}")
-        return 
+        if l!=login or par!=parol:
+            print(f"{QIZIL}Notogri kiritdingiz!!!{RANG}")
+            return 
 
-    print("""
-    ADMIN MENU
-1-tour qo'shish
-2-tour o'chirish
-3-barcha tourlar
-4-chiqish
-""")
-    a=input("Tanlang:")
-    
-    if a=="1":
-        tour_qoshish()
-    
-    elif a=="2":
-        tour_uchirish()
+        print("""
+        ADMIN MENU
+    1-tour qo'shish
+    2-tour o'chirish
+    3-barcha tourlar
+    4-chiqish
+    """)
+        a=input("Tanlang:")
+        
+        if a=="1":
+            tour_qoshish()
+        
+        elif a=="2":
+            tour_uchirish()
 
-    elif a=="3":
-        barcha_tour()
+        elif a=="3":
+            barcha_tour()
 
-    elif a=="4":
-        return 
-    else:
-        print("notogri kirtildi boshqa tanlang")
-        admin_menu()
-    
+        elif a=="4":
+            return 
+        else:
+            print("notogri kirtildi boshqa tanlang")
+            admin_menu()
+        
