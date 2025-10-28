@@ -76,6 +76,52 @@ def tour_uchirish():
             TOURLAR.pop(a-1)
             print(f"{a} idli tour uchirildi")
     
+# Admin panel statistika funksiyas
+def statistikani_korsatish():
+     print(f"""
+     Umumiy foydalanuvchilar soni: {len(users)}
+     Umumiy buyurtmalar soni: {len(orders)}
+     Umumiy daromad: {sum(order['amount'] for order in orders)}$
+     """)
+users = [
+    {"id": 1, "name": "Alibek"},
+    {"id": 2, "name": "Asilbek"},
+    {"id": 3, "name": "Ozodbek"},
+]
+
+orders = [
+    {"user_id": 1, "amount": 100},
+    {"user_id": 2, "amount": 150},
+    {"user_id": 1, "amount": 200},
+    {"user_id": 3, "amount": 50},
+]
+
+def statistics(users, orders):
+    total_users = len(users)
+    total_orders = len(orders)
+    total_income = sum(order["amount"] for order in orders)
+
+    
+    count = {}
+    for order in orders:
+        count[order["user_id"]] = count.get(order["user_id"], 0) + 1
+
+    
+    top_user_id = max(count, key=count.get)
+    top_user_name = [user["name"] for user in users if user["id"] == top_user_id][0]
+
+    return {
+        "total_users": total_users,
+        "total_orders": total_orders,
+        "total_income": total_income,
+        "top_user": top_user_name,
+        "top_user_orders": count[top_user_id]
+    }
+
+print(statistics(users, orders))
+
+
+
 
 def barcha_tour():
     for i in TOURLAR:
@@ -116,7 +162,8 @@ def admin_menu():
 1-tour qo'shish
 2-tour o'chirish
 3-barcha tourlar
-4-chiqish
+4-statistika
+5-chiqish
 """)
     a=input("Tanlang:")
     
@@ -130,6 +177,9 @@ def admin_menu():
         barcha_tour()
 
     elif a=="4":
+        statistikani_korsatish()
+
+    elif a=="5":
         return 
     else:
         print("notogri kirtildi boshqa tanlang")
