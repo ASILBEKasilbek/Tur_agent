@@ -1,5 +1,3 @@
-
-
 from dastur_kodlari.asilbek.admin import barcha_tour,TOURLAR
 
 KOK="\033[34m"
@@ -30,14 +28,13 @@ def shaxsiy_kabinet(foydalanuvchi_id):
         print(f"{QIZIL} Noto‘g‘ri tanlov! {RANG}")
 
 def balans_kurish(foydalanuvchi_id):
-    for i in user:
+    for i in USER:
         if i["id"] ==  foydalanuvchi_id:
             print(foydalanuvchi_id)
             print(f"{KOK} Sizning balansingiz:  {YASHIL}{ i["balans"]}{RANG}")
-            
 
 def pul_qushish(foydalanuvchi_balans):
-    for i in user:
+    for i in USER:
         if i["id"] == foydalanuvchi_balans:
         
             pul = int(input("Qancha pul qoshasiz: "))
@@ -51,9 +48,8 @@ def pul_qushish(foydalanuvchi_balans):
             print(f"Sizning balansingiz: {i["balans"]}")
             
 
-
 def malumotlar(foydalanuvchi_id):
-    for i in user:
+    for i in USER:
         if i["id"]==foydalanuvchi_id:
             print(f"""
         Malumotlarim
@@ -105,7 +101,6 @@ def foydalanuvchi():
 
     if a=="1":
         d=kirish()#(True, 1)
-        print(d)
         if d[0]==True:
             return True,d[1]
         else:
@@ -114,7 +109,6 @@ def foydalanuvchi():
     elif a=="2":
 
         q=ruyxatdan_utish()
-        print(q)
         if q[0]==True:
             return True,q[1]
         else:
@@ -127,7 +121,7 @@ def foydalanuvchi():
         foydalanuvchi()
 
 
-user=[
+USER=[
     {
         'id':1,
         'login':'Asilbek',
@@ -148,9 +142,10 @@ user=[
     }
 
 ]
+
 def ruyxatdan_utish():
     login=input("Login kiriting:")
-    for i in user:
+    for i in USER:
         if i['login']==login:
             print("Bu login allaqachon tizimdan ruyxatdan utgan!!!")
             return 
@@ -158,9 +153,9 @@ def ruyxatdan_utish():
     parol2=input("parolni qaytadan kiriting:")
     if parol==parol2:
 
-        id_len=len(user)+1
+        id_len=len(USER)+1
 
-        user.append(
+        USER.append(
             {
                 "id":id_len,
                 "login":login,
@@ -184,7 +179,7 @@ def kirish():
     
     parol=input("parol kiriting:")
     
-    for i in user:
+    for i in USER:
         if i["login"]==login and i["parol"]==parol:
             print("Tizimga kirdingiz!!!")
             return (True,i['id'])
@@ -195,14 +190,16 @@ def kirish():
     return False, 1
 
 
-SAVAT = []      
+SAVAT = []   
+
 def tour_tanlash():   
+    barcha_tour()
     tanlov = input("Qaysi tur paketini xarid qilasiz? ID raqamini kiriting: ")
     for i in TOURLAR:
         if str(i["id"]) == tanlov:
             SAVAT.append(i)
             print(f"\nSiz {i['qayerga']} yo‘nalishidagi tur paketini tanladingiz!")
-
+            print("Savatingizga qo‘shildi.\n")
             break
     else:
         print("Bunday ID mavjud emas.")
@@ -244,7 +241,7 @@ def foydalanuvchi_menu():
     a=input(f" {YASHIL} Tanlang: {RANG}")
 
     if a=="1":
-        barcha_tour()
+        tour_tanlash()
     elif a=="2":
         tour_qidirish()
     elif a=="3":

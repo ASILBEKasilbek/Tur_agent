@@ -1,4 +1,4 @@
-from dastur_kodlari.alibek.foydalanuvchi import tour_tanlash
+# from dastur_kodlari.alibek.foydalanuvchi import tour_tanlash
 KOK="\033[34m"
 QIZIL="\033[31m"
 YASHIL="\033[32m"
@@ -65,7 +65,6 @@ def tour_uchirish():
             print(f"{a} idli tour uchirildi")
     
 def barcha_tour():
-    tour_tanlash()
     for i in TOURLAR:
         print(f"""
         "id": {i["id"]},
