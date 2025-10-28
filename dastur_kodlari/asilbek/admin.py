@@ -16,7 +16,7 @@ import json
 JSON_FILE = "turlar.json"
    
 # TOURLAR ro'yxatini JSON faylga saqlash
-def saqlash_json():
+def saqlash_json(): 
     with open(JSON_FILE, "w", encoding="utf-8") as f:
         json.dump(TOURLAR, f, ensure_ascii=False, indent=4)
     print("Ma'lumotlar JSON faylga saqlandi!")
