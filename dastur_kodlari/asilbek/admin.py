@@ -10,6 +10,7 @@
 
 """
    
+# from dastur_kodlari.alibek.foydalanuvchi import tour_tanlash
 KOK="\033[34m"
 QIZIL="\033[31m"
 YASHIL="\033[32m"
