@@ -204,21 +204,72 @@ def tour_tanlash():
     else:
         print("Bunday ID mavjud emas.")
         
-def savat():
+
+def savat(foydalanuvchi_id):
     if not SAVAT:
-        print("Savat hozircha bo‘sh.")
+        print(f"{QIZIL}Savat hozircha bo‘sh.{RANG}")
         return
 
-    print("Sizning savatingiz:")
+    print(f"{YASHIL}Sizning savatingiz:{RANG}")
+    jami_summa = 0
     for i in SAVAT:
-        print(f"{i['qayerga']} - narxi: {i['narxi']} - vaqt: {i['vaqt']}")
+        print(f"{i['qayerdan']} ➜ {i['qayerga']} | Narxi: {i['narxi']} so‘m | Vaqt: {i['vaqt']}")
+        jami_summa += int(i["narxi"])
 
-    tasdiq = input("Savatdagi turlarni rasmiylashtirasizmi? (ha/yo‘q): ").lower()
-    if tasdiq == "ha":
-        print("Xarid rasmiylashtirildi! Rahmat!")
+    print(f"\nJami summa: {YASHIL}{jami_summa}{RANG} so‘m")
+
+    tasdiq = input("Savatdagi turlarni xarid qilasizmi? (ha/yo‘q): ").lower()
+    if tasdiq != "ha":
+        print("Xarid bekor qilindi.")
+        return
+
+ 
+    for i in USER:
+        if i["id"] == foydalanuvchi_id:
+            foydalanuvchi = i
+            break
+    else:
+        print(f"{QIZIL}Foydalanuvchi topilmadi!{RANG}")
+        return
+
+    balans = int(foydalanuvchi["balans"])
+
+    if balans >= jami_summa:
+        
+        foydalanuvchi["balans"] = balans - jami_summa
+        print(f"{YASHIL}Xarid muvaffaqiyatli amalga oshirildi!{RANG}")
+        print(f"Yangi balans: {foydalanuvchi['balans']} so‘m")
+
+       
+        if "xaridlar" not in foydalanuvchi:
+            foydalanuvchi["xaridlar"] = []
+        foydalanuvchi["xaridlar"].extend(SAVAT)
+
         SAVAT.clear()
     else:
-        print("Xarid bekor qilindi.")
+        kerak = jami_summa - balans
+        print(f"{QIZIL}Balans yetarli emas! Sizga {kerak} so‘m kerak.{RANG}")
+        tanlov = input("Balansni to‘ldirasizmi? (ha/yo‘q): ").lower()
+
+        if tanlov == "ha":
+            pul = int(input("Qancha pul qo‘shmoqchisiz?: "))
+            foydalanuvchi["balans"] = balans + pul
+            print(f"Yangi balans: {foydalanuvchi['balans']} so‘m")
+
+            if foydalanuvchi["balans"] >= jami_summa:
+                foydalanuvchi["balans"] -= jami_summa
+                print(f"{YASHIL}Xarid amalga oshirildi!{RANG}")
+                print(f"Yangi balans: {foydalanuvchi['balans']} so‘m")
+
+                if "xaridlar" not in foydalanuvchi:
+                    foydalanuvchi["xaridlar"] = []
+                foydalanuvchi["xaridlar"].extend(SAVAT)
+
+                SAVAT.clear()
+            else:
+                print(f"{QIZIL}Balans hali ham yetarli emas.{RANG}")
+        else:
+            print("Xarid bekor qilindi.")
 
 
 def foydalanuvchi_menu():
@@ -247,7 +298,7 @@ def foydalanuvchi_menu():
     elif a=="3":
         shaxsiy_kabinet(foydalanuvchi_id)
     elif a=="4":
-        savat()
+        savat(foydalanuvchi_id)
     elif a=="5":
         print("Foydalanuvchi paneldan chiqildi")
         return
