@@ -9,7 +9,7 @@ RANG="\033[0m"
 def tour_main():
     while True:
         print(f"""
-    {QIZIL}Shaxslar:{RANG}
+    {KOK}Shaxslar:{RANG}
             {KOK}1-foydalanuvchi
             2-admin{RANG}
             """)

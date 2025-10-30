@@ -7,14 +7,13 @@ RANG="\033[0m"
 # print(f"{QIZIL} ozodbek magic{RANG}")
 
 def shaxsiy_kabinet(foydalanuvchi_id):
-    print(f"""{YASHIL}
+    print(f"""{KOK}
         1. Malumotlarim
         2. Balansni ko‘rish
         3. Balansga pul qo‘shish
-        4. Chiqish
+        4. Ortga
         {RANG}""")
-    
-    tanlov = input(f"{KOK}Tanlovni kiriting: {RANG}")
+    tanlov = input(f"{YASHIL}Tanlovni kiriting: {RANG}")
 
     if tanlov == "1":
         malumotlar(foydalanuvchi_id)
@@ -34,35 +33,43 @@ def balans_kurish(foydalanuvchi_id):
             print(f"{KOK} Sizning balansingiz:  {YASHIL}{ i["balans"]}{RANG}")
 
 def pul_qushish(foydalanuvchi_balans):
+    if foydalanuvchi_balans is None:
+        print(f"{QIZIL} Foydalanuvchi topilmadi! {RANG}")
+        return
     for i in USER:
         if i["id"] == foydalanuvchi_balans:
-        
-            pul = int(input("Qancha pul qoshasiz: "))
+
+            pul = int(input(f"{YASHIL}Qancha pul qoshasiz: {RANG}"))
 
             if i["balans"]:
-                print(type(pul),type(i["balans"]))
                 i["balans"]  = int(i["balans"]) + pul
                 
             else:
                 i["balans"] = pul
-            print(f"Sizning balansingiz: {i["balans"]}")
+            print(f"{KOK}Sizning balansingiz: {i['balans']}{RANG}")
             
 
 def malumotlar(foydalanuvchi_id):
-    for i in USER:
-        if i["id"]==foydalanuvchi_id:
-            print(f"""
-        Malumotlarim
-login:{i['login']}
-parol:{i['parol']}
+    foydalanuvchi_malumoti=USER[foydalanuvchi_id-1]
+    if foydalanuvchi_malumoti:
+        print(f"""{KOK}
+            Malumotlarim
+    Login:{YASHIL}{foydalanuvchi_malumoti['login']}
+    {KOK}Parol:{YASHIL}{foydalanuvchi_malumoti['parol']}
+            {KOK}Xaridlarim:{YASHIL}
 """)
+        for i in foydalanuvchi_malumoti['xaridlar']:
+            for j in TOURLAR:
+                if i==j['id']:
+                    print(f"""{YASHIL}
+    {j['qayerdan']} ➜ {j['qayerga']} | Narxi: {j['narxi']} so‘m | Vaqt: {j['vaqt']}
+        {RANG}""")
 
 def uxshash(qayerdan1,qayerdan2):
-    """Toshkent,Tashkent"""
-    qayerdan1=qayerdan1.lower()#toshkent
-    qayerdan2=qayerdan2.lower()#tashkent
+    qayerdan1=qayerdan1.lower()
+    qayerdan2=qayerdan2.lower()
     t=0
-    for i in range(8):#range(8)==[0,1,2,3,4,5,6,7]
+    for i in range(8):
         if qayerdan1[i]==qayerdan2[i]:
             t+=1
 
@@ -73,29 +80,35 @@ def uxshash(qayerdan1,qayerdan2):
     
 
 def tour_qidirish():
-    print("""Qidirish""")
-    qayerdan=input("qayerdan bormoqchisiz?:")
-    qayerga=input("qayerga bormoqchisiz?:")
-    qachon=input("Qachon bormoqchisiz?:")
+    print(f"{KOK}Qidirish{RANG}")
+    qayerdan=input(f"{YASHIL}qayerdan bormoqchisiz?:{RANG}")
+    qayerga=input(f"{YASHIL}qayerga bormoqchisiz?:{RANG}")
+    qachon=input(f"{YASHIL}Qachon bormoqchisiz?:{RANG}")
+    if not (qayerdan and qayerga and qachon):
+        print(f"{QIZIL}Biror nima kiritng!!!{RANG}")
+        return
     for i in TOURLAR:
         if uxshash(i["qayerdan"],qayerdan) and uxshash(i["qayerga"],qayerga) and i["vaqt"][:-6]==qachon:
-            print("Topildi!!")
-            print(f"""
-            "id":{i["id"]},
-            "qayerdan": {i["qayerdan"]}, 
-            "qayerga": {i["qayerga"]}, 
-            "davomiylik": {i["davomiylik"]},
-            "vaqt" : {i["vaqt"]},
-            "narxi": {i["narxi"]},
-            "chipta_turi": {i["chipta_turi"]},
-            "joylar_soni": {i["joylar_soni"]},
-            "transport_turi": {i["transport_turi"]},""")
-          
+            print(f"{KOK}Topildi!!{RANG}")
+            print(f"""{KOK}
+            -------------------------
+            🆔 ID: {i["id"]}
+            📍 Qayerdan: {i["qayerdan"]}
+            🎯 Qayerga: {i["qayerga"]}
+            ⏳ Davomiylik: {i["davomiylik"]}
+            🕒 Vaqt: {i["vaqt"]}
+            💰 Narxi: {i["narxi"]}
+            🎫 Chipta turi: {i["chipta_turi"]}
+            🪑 Joylar soni: {i["joylar_soni"]}
+            🚍 Transport turi: {i["transport_turi"]}
+            -------------------------{RANG}
+            """)
+
 def foydalanuvchi():
-    print("""
-    1-KIRISH
-    2-RO'YXTADAN O'TISH
-    3-ortga
+    print(f"""{KOK}
+    1-Kirish
+    2-Ro'yxatdan o'tish
+    3-Ortga{RANG}
 """)
     a=input(f" {YASHIL} Tanlang: {RANG}")
 
@@ -144,13 +157,13 @@ USER=[
 ]
 
 def ruyxatdan_utish():
-    login=input("Login kiriting:")
+    login=input(f"{YASHIL}Login kiriting:{RANG}")
     for i in USER:
         if i['login']==login:
-            print("Bu login allaqachon tizimdan ruyxatdan utgan!!!")
-            return 
-    parol=input("Parol kiriting:")
-    parol2=input("parolni qaytadan kiriting:")
+            print(f"{QIZIL}Bu login allaqachon tizimdan ruyxatdan utgan!!!{RANG}")
+            return
+    parol=input(f"{YASHIL}Parol kiriting:{RANG}")
+    parol2=input(f"{YASHIL}Parolni qaytadan kiriting:{RANG}")
     if parol==parol2:
 
         id_len=len(USER)+1
@@ -162,12 +175,12 @@ def ruyxatdan_utish():
                 "parol":parol
             }
         )
-        print("Ro'yxatdan o'tingiz")
+        print(f"{KOK}Ro'yxatdan o'tingiz{RANG}")
         return (True,id_len)
 
     elif parol!=parol2:
-        print("Xato")
-        print("Bir xil kiriting!!")
+        print(f"{QIZIL}Xato{RANG}")
+        print(f"{QIZIL}Bir xil kiriting!!{RANG}")
         ruyxatdan_utish()
     else:
         return False
@@ -175,35 +188,39 @@ def ruyxatdan_utish():
 
 
 def kirish():
-    login=input("Login kiritng:")
-    
-    parol=input("parol kiriting:")
-    
+    login=input(f"{YASHIL}Login kiritng:{RANG}")
+
+    parol=input(f"{YASHIL}Parol kiriting:{RANG}")
+
     for i in USER:
         if i["login"]==login and i["parol"]==parol:
-            print("Tizimga kirdingiz!!!")
+            print(f"{KOK}Tizimga kirdingiz!!!{RANG}")
             return (True,i['id'])
            
 
-    print("Xato")
-    print("Qaytadan kriting!!!")
+    print(f"{QIZIL}Xato{RANG}")
+    print(f"{QIZIL}Qaytadan kriting!!!{RANG}")
     return False, 1
 
 
 SAVAT = []   
 
-def tour_tanlash():   
+def tour_tanlash(foydalanuvchi_id):   
     barcha_tour()
-    tanlov = input("Qaysi tur paketini xarid qilasiz? ID raqamini kiriting: ")
+    tanlov = input(f"{YASHIL}Qaysi tur paketini xarid qilasiz? ID raqamini kiriting: {RANG}")
     for i in TOURLAR:
         if str(i["id"]) == tanlov:
-            SAVAT.append(i)
-            print(f"\nSiz {i['qayerga']} yo‘nalishidagi tur paketini tanladingiz!")
-            print("Savatingizga qo‘shildi.\n")
+            SAVAT.append(
+                {
+                    "id": foydalanuvchi_id,
+                    "tour_id": i["id"],
+                })
+            print(f"{KOK}Siz {YASHIL}{i['qayerga']} {KOK}yo‘nalishidagi tur paketini tanladingiz!{RANG}")
+            print(f"{KOK}Savatingizga qo‘shildi.{RANG}")
             break
     else:
-        print("Bunday ID mavjud emas.")
-        
+        print(f"{QIZIL}Bunday ID mavjud emas.{RANG}")
+
 
 def savat(foydalanuvchi_id):
     if not SAVAT:
@@ -212,15 +229,30 @@ def savat(foydalanuvchi_id):
 
     print(f"{YASHIL}Sizning savatingiz:{RANG}")
     jami_summa = 0
-    for i in SAVAT:
-        print(f"{i['qayerdan']} ➜ {i['qayerga']} | Narxi: {i['narxi']} so‘m | Vaqt: {i['vaqt']}")
-        jami_summa += int(i["narxi"])
+    k=[]
+    for j in SAVAT:
+        if j['id'] == foydalanuvchi_id:
+            for i in TOURLAR:
+                if i['id'] == j['tour_id']:
+                    k.append(i)
+                    jami_summa += int(i["narxi"])
+                    print(f"{KOK}{i['qayerdan']} ➜ {i['qayerga']} | Narxi: {i['narxi']} so‘m | Vaqt: {i['vaqt']}{RANG}")
+    else:
+        if not k:
+            print(f"{QIZIL}Savat hozircha bo‘sh.{RANG}")
+            return
+        
+    for i in USER:
+        if i['id'] == foydalanuvchi_id:
+            balans = int(i['balans'])
+            print(f"{KOK}Sizning balansingiz: {balans} so‘m{RANG}")
+            break
 
-    print(f"\nJami summa: {YASHIL}{jami_summa}{RANG} so‘m")
+    print(f"{KOK}\nJami summa: {YASHIL}{jami_summa} so‘m{RANG}")
 
-    tasdiq = input("Savatdagi turlarni xarid qilasizmi? (ha/yo‘q): ").lower()
+    tasdiq = input(f"{KOK}Savatdagi turlarni xarid qilasizmi? (ha/yo‘q): {RANG}").lower()
     if tasdiq != "ha":
-        print("Xarid bekor qilindi.")
+        print(f"{QIZIL}Xarid bekor qilindi.{RANG}")
         return
 
  
@@ -238,38 +270,40 @@ def savat(foydalanuvchi_id):
         
         foydalanuvchi["balans"] = balans - jami_summa
         print(f"{YASHIL}Xarid muvaffaqiyatli amalga oshirildi!{RANG}")
-        print(f"Yangi balans: {foydalanuvchi['balans']} so‘m")
-
-       
+        print(f"{KOK}Yangi balans: {foydalanuvchi['balans']} so‘m{RANG}")
+        
         if "xaridlar" not in foydalanuvchi:
             foydalanuvchi["xaridlar"] = []
-        foydalanuvchi["xaridlar"].extend(SAVAT)
 
-        SAVAT.clear()
+        for i in SAVAT[:]:
+            if i['id'] == foydalanuvchi_id:
+                SAVAT.remove(i)
+                foydalanuvchi["xaridlar"].append(i['tour_id'])
     else:
         kerak = jami_summa - balans
         print(f"{QIZIL}Balans yetarli emas! Sizga {kerak} so‘m kerak.{RANG}")
-        tanlov = input("Balansni to‘ldirasizmi? (ha/yo‘q): ").lower()
+        tanlov = input(f"{YASHIL}Balansni to‘ldirasizmi? (ha/yo‘q): {RANG}").lower()
 
         if tanlov == "ha":
-            pul = int(input("Qancha pul qo‘shmoqchisiz?: "))
+            pul = int(input(f"{YASHIL}Qancha pul qo‘shmoqchisiz?: {RANG}"))
             foydalanuvchi["balans"] = balans + pul
-            print(f"Yangi balans: {foydalanuvchi['balans']} so‘m")
+            print(f"{KOK}Yangi balans: {foydalanuvchi['balans']} so‘m{RANG}")
 
             if foydalanuvchi["balans"] >= jami_summa:
                 foydalanuvchi["balans"] -= jami_summa
-                print(f"{YASHIL}Xarid amalga oshirildi!{RANG}")
-                print(f"Yangi balans: {foydalanuvchi['balans']} so‘m")
+                print(f"{KOK}Xarid amalga oshirildi!{RANG}")
+                print(f"{KOK}Yangi balans: {foydalanuvchi['balans']} so‘m{RANG}")
 
                 if "xaridlar" not in foydalanuvchi:
                     foydalanuvchi["xaridlar"] = []
-                foydalanuvchi["xaridlar"].extend(SAVAT)
-
-                SAVAT.clear()
+                for i in SAVAT[:]:
+                    if i['id'] == foydalanuvchi_id:
+                        SAVAT.remove(i)
+                        foydalanuvchi["xaridlar"].append(i['tour_id'])
             else:
                 print(f"{QIZIL}Balans hali ham yetarli emas.{RANG}")
         else:
-            print("Xarid bekor qilindi.")
+            print(f"{QIZIL}Xarid bekor qilindi.{RANG}")
 
 
 def foydalanuvchi_menu():
@@ -279,29 +313,29 @@ def foydalanuvchi_menu():
     elif a[0]==False:
         foydalanuvchi_menu()
     foydalanuvchi_id=a[1]
-    print("""
-    Foydalanuvchi panel
+    while True:
+        print(f"""
+        {KOK}Foydalanuvchi panel
 
-1-tourlarni kurish
-2-tourlarni qidirish
-3-shaxsiy kabinet
-4-savatcha
-5-chiqish
-
-""")
-    a=input(f" {YASHIL} Tanlang: {RANG}")
-
-    if a=="1":
-        tour_tanlash()
-    elif a=="2":
-        tour_qidirish()
-    elif a=="3":
-        shaxsiy_kabinet(foydalanuvchi_id)
-    elif a=="4":
-        savat(foydalanuvchi_id)
-    elif a=="5":
-        print("Foydalanuvchi paneldan chiqildi")
-        return
-    else:
-        print("Notogri buyruq")
-        foydalanuvchi_menu()
+    1-tourlarni kurish
+    2-tourlarni qidirish
+    3-shaxsiy kabinet
+    4-savatcha{QIZIL}
+    5-chiqish
+{RANG}
+    """)
+        a=input(f" {YASHIL} Tanlang: {RANG}")
+        
+        if a=="1":
+            tour_tanlash(foydalanuvchi_id)
+        elif a=="2":
+            tour_qidirish()
+        elif a=="3":
+            shaxsiy_kabinet(foydalanuvchi_id)
+        elif a=="4":
+            savat(foydalanuvchi_id)
+        elif a=="5":
+            print(f"{KOK}Foydalanuvchi paneldan chiqildi{RANG}")
+            return
+        else:
+            print(f"{QIZIL}Notogri buyruq{RANG}")
